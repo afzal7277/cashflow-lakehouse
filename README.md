@@ -1,4 +1,4 @@
-# Spark Finance Lakehouse
+# Cashflow Lakehouse
 
 A PySpark + Delta Lake lakehouse pipeline for financial transaction data, built and
 validated locally on a sample, then scaled to a distributed Azure Databricks cluster
@@ -22,7 +22,18 @@ Gold (aggregated metrics) → Benchmarks (naive vs optimized) → ML (feature en
 MLlib model + batch scoring).
 
 ## Status
-🚧 In progress — local dev phase.
+🚧 In progress
+
+- [x] PRD / HLD / LLD documented
+- [x] Dockerized dev environment (Python 3.11 + JDK 17)
+- [x] Data generator — PaySim-seeded, scaled + perturbed, batched with logging/resume
+- [x] Bronze layer — raw ingestion to Delta, ingestion metadata
+- [x] Data quality tests (generator + Bronze)
+- [ ] Silver layer — cleaning, MERGE upserts, schema evolution
+- [ ] Gold layer — aggregated metrics
+- [ ] Benchmark module — naive vs optimized Spark config
+- [ ] ML layer — feature engineering, MLlib model, batch scoring
+- [ ] Azure Databricks + ADLS Gen2 cluster-scale run
 
 ## Setup
 See `docs/local_setup.md`.
