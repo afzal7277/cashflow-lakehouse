@@ -1,0 +1,13 @@
+services:
+  cashflow-lakehouse:
+    build: .
+    container_name: cashflow-lakehouse
+    volumes:
+      - .:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    environment:
+      - NUM_ROWS=${NUM_ROWS:-5000000}
+      - FRAUD_RATIO=${FRAUD_RATIO:-0.005}
+      - BATCH_SIZE=${BATCH_SIZE:-500000}
