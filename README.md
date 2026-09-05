@@ -29,7 +29,7 @@ MLlib model + batch scoring).
 - [x] Data generator — PaySim-seeded, scaled + perturbed, batched with logging/resume
 - [x] Bronze layer — raw ingestion to Delta, ingestion metadata
 - [x] Data quality tests (generator + Bronze)
-- [ ] Silver layer — cleaning, MERGE upserts, schema evolution
+- [x] Silver layer — cleaning, MERGE upserts, schema evolution (tested)
 - [ ] Gold layer — aggregated metrics
 - [ ] Benchmark module — naive vs optimized Spark config
 - [ ] ML layer — feature engineering, MLlib model, batch scoring
