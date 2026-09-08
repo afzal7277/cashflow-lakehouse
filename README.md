@@ -31,7 +31,7 @@ MLlib model + batch scoring).
 - [x] Data quality tests (generator + Bronze)
 - [x] Silver layer — cleaning, MERGE upserts, schema evolution (tested)
 - [x] Gold layer — aggregated metrics (daily_metrics, fraud_summary, top_accounts; Z-ordered; tested)
-- [ ] Benchmark module — naive vs optimized Spark config
+- [x] Benchmark module — naive vs optimized join (SortMergeJoin vs BroadcastHashJoin, ~2.8x speedup)
 - [ ] ML layer — feature engineering, MLlib model, batch scoring
 - [ ] Azure Databricks + ADLS Gen2 cluster-scale run
 
