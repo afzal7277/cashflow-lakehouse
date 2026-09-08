@@ -8,12 +8,21 @@ from pyspark.sql import SparkSession
 from delta import configure_spark_with_delta_pip
 
 
-def get_spark_session(app_name: str = "spark-finance-lakehouse", shuffle_partitions: int = 8) -> SparkSession:
+def get_spark_session(
+    app_name: str = "spark-finance-lakehouse",
+    shuffle_partitions: int = 8,
+    aqe_enabled: bool = True,
+    broadcast_threshold_bytes: int = None,
+) -> SparkSession:
     """
     Build a local SparkSession with Delta Lake support.
 
     shuffle_partitions is deliberately low (default 8) for local dev —
     Spark's default of 200 is tuned for clusters, not a laptop.
+
+    aqe_enabled toggles Adaptive Query Execution.
+    broadcast_threshold_bytes overrides spark.sql.autoBroadcastJoinThreshold
+    (pass -1 to disable auto-broadcast entirely, e.g. for a naive benchmark).
     """
     builder = (
         SparkSession.builder.appName(app_name)
@@ -22,7 +31,11 @@ def get_spark_session(app_name: str = "spark-finance-lakehouse", shuffle_partiti
         .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
         .config("spark.sql.shuffle.partitions", str(shuffle_partitions))
         .config("spark.driver.memory", "4g")
+        .config("spark.sql.adaptive.enabled", str(aqe_enabled).lower())
     )
+
+    if broadcast_threshold_bytes is not None:
+        builder = builder.config("spark.sql.autoBroadcastJoinThreshold", str(broadcast_threshold_bytes))
 
     spark = configure_spark_with_delta_pip(builder).getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
