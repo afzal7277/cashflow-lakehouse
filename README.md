@@ -30,7 +30,7 @@ MLlib model + batch scoring).
 - [x] Bronze layer — raw ingestion to Delta, ingestion metadata
 - [x] Data quality tests (generator + Bronze)
 - [x] Silver layer — cleaning, MERGE upserts, schema evolution (tested)
-- [ ] Gold layer — aggregated metrics
+- [x] Gold layer — aggregated metrics (daily_metrics, fraud_summary, top_accounts; Z-ordered; tested)
 - [ ] Benchmark module — naive vs optimized Spark config
 - [ ] ML layer — feature engineering, MLlib model, batch scoring
 - [ ] Azure Databricks + ADLS Gen2 cluster-scale run
